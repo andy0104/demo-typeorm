@@ -1,0 +1,27 @@
+{
+   "name": "demo-typeorm",
+   "version": "0.0.1",
+   "description": "Awesome project developed with TypeORM.",
+   "devDependencies": {
+      "@types/express": "^4.17.8",
+      "@types/node": "^14.6.4",
+      "concurrently": "^5.3.0",
+      "nodemon": "^2.0.4",
+      "ts-node": "3.3.0",
+      "typescript": "3.3.3333"
+   },
+   "dependencies": {
+      "express": "^4.17.1",
+      "mysql": "^2.14.1",
+      "reflect-metadata": "^0.1.10",
+      "typeorm": "0.2.25"
+   },
+   "scripts": {
+      "build": "tsc",
+      "watch-ts": "tsc -w",
+      "watch-express": "nodemon build/index.js",
+      "dev": "concurrently npm:watch-*",
+      "start": "ts-node src/index.ts",
+      "typeorm": "ts-node ./node_modules/typeorm/cli.js"
+   }
+}
