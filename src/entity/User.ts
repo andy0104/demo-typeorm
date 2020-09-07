@@ -1,5 +1,6 @@
-import {Entity, PrimaryGeneratedColumn, Column} from "typeorm";
-import { getConnection } from 'typeorm';
+import {Entity, PrimaryGeneratedColumn, Column, OneToOne, JoinColumn} from "typeorm";
+import { type } from "os";
+import { Profile } from "./Profile";
 
 @Entity()
 export class User {
@@ -21,6 +22,10 @@ export class User {
 
   @Column()
   contactno: string;
+
+  @OneToOne(type => Profile)
+  @JoinColumn()
+  profile: Profile;
 }
 
 

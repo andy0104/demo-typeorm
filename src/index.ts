@@ -1,12 +1,21 @@
 import "reflect-metadata";
 import * as express from 'express';
+import * as bodyParser from 'body-parser';
 import {createConnection, Connection} from "typeorm";
 
-import {User} from "./entity/User";
+import { User } from './entity/User';
+import { Profile } from './entity/Profile';
+
+import { createUser } from './controller/UserController';
 
 const app = express(); 
+app.use(bodyParser.json());
+
+app.get('/user-create', createUser);
 
 app.listen(5000, async () => {
+  console.log("./src/entity/*.ts");
+  
   try {
     const connection: Connection = await createConnection({
       type: "mysql",
@@ -16,13 +25,14 @@ app.listen(5000, async () => {
       password: "",
       database: "demo_typeorm",
       entities: [
-        __dirname + "src/entity/**/*.ts" //__dirname + "src/entity/*{.js,.ts}"
-      ],
+        User,
+        Profile
+      ], //__dirname + "src/entity/**/*.ts" //__dirname + "src/entity/*{.js,.ts}"
       migrations: [
-        __dirname + "src/migration/**/*.ts"
+        __dirname + "src/migration/*.ts"
       ],
       subscribers: [
-        __dirname + "src/subscriber/**/*.ts"
+        __dirname + "src/subscriber/*.ts"
       ],
       migrationsTableName: "migrations",
       cli: { 
